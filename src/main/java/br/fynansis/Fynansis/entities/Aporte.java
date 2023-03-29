@@ -126,4 +126,12 @@ public class Aporte {
     public Date retornaDataAtual() {
         return new Date();
     }
+
+    public Aporte atualizaAporte(AporteDTO aporteDTO){
+        setDataCompra(aporteDTO.getDataCompra());
+        setNumCotas(aporteDTO.getNumCotas());
+        setValorCompra(aporteDTO.getValorCompra());
+        setDataAtualizacao(retornaDataAtual());
+        return this;
+    }
 }

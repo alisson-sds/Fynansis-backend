@@ -30,4 +30,10 @@ public class AporteService {
         return aporte;
     }
 
+    public Aporte atualizaAporte(AporteDTO aporteDTO, UUID codAporte) throws AporteException {
+        Aporte aporte = leAporte(codAporte);
+        aporte.atualizaAporte(aporteDTO);
+        return aporteRepository.save(aporte);
+    }
+
 }

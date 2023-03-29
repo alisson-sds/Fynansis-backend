@@ -1,6 +1,7 @@
 package br.fynansis.Fynansis.controller;
 
 import br.fynansis.Fynansis.dtos.AporteDTO;
+import br.fynansis.Fynansis.dtos.InvestimentoDTO;
 import br.fynansis.Fynansis.entities.Aporte;
 import br.fynansis.Fynansis.entities.Investimento;
 import br.fynansis.Fynansis.exceptions.AporteException;
@@ -37,11 +38,20 @@ public class AporteController {
     @GetMapping("/ler/{id}")
     public ResponseEntity<Aporte> leAporte(@PathVariable UUID id){
         try {
-            System.out.println("teste123123213");
             Aporte aporte = aporteService.leAporte(id);
             return new ResponseEntity<>(aporte, HttpStatusCode.valueOf(200));
         } catch (AporteException i){
             return new ResponseEntity<>(HttpStatusCode.valueOf(404));
+        }
+    }
+
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<Aporte> atualizaInvestimento(@RequestBody AporteDTO aporteDTO, @PathVariable UUID id) throws InvestimentoException {
+        try {
+            Aporte aporte = aporteService.atualizaAporte(aporteDTO, id);
+            return new ResponseEntity<>(aporte, HttpStatusCode.valueOf(200));
+        } catch (AporteException i){
+            return new ResponseEntity<>(HttpStatusCode.valueOf(400));
         }
     }
 
