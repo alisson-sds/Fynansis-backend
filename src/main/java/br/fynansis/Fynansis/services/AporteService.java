@@ -36,4 +36,9 @@ public class AporteService {
         return aporteRepository.save(aporte);
     }
 
+    public void deletaAporte(UUID codAporte) throws AporteException{
+        Aporte aporte = leAporte(codAporte);
+        aporteRepository.delete(aporte);
+    }
+
 }

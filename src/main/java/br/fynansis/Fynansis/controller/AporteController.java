@@ -46,10 +46,20 @@ public class AporteController {
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Aporte> atualizaInvestimento(@RequestBody AporteDTO aporteDTO, @PathVariable UUID id) throws InvestimentoException {
+    public ResponseEntity<Aporte> atualizaAporte(@RequestBody AporteDTO aporteDTO, @PathVariable UUID id) throws InvestimentoException {
         try {
             Aporte aporte = aporteService.atualizaAporte(aporteDTO, id);
             return new ResponseEntity<>(aporte, HttpStatusCode.valueOf(200));
+        } catch (AporteException i){
+            return new ResponseEntity<>(HttpStatusCode.valueOf(404));
+        }
+    }
+
+    @DeleteMapping("deletar/{id}")
+    public ResponseEntity<Aporte> deletaAporte(@PathVariable UUID id) {
+        try {
+            aporteService.deletaAporte(id);
+            return new ResponseEntity<>(HttpStatusCode.valueOf(200));
         } catch (AporteException i){
             return new ResponseEntity<>(HttpStatusCode.valueOf(400));
         }

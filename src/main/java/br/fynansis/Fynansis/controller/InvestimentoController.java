@@ -2,8 +2,10 @@ package br.fynansis.Fynansis.controller;
 
 import br.fynansis.Fynansis.dtos.InvestimentoDTO;
 import br.fynansis.Fynansis.dtos.UsuarioDTO;
+import br.fynansis.Fynansis.entities.Aporte;
 import br.fynansis.Fynansis.entities.Investimento;
 import br.fynansis.Fynansis.entities.Usuario;
+import br.fynansis.Fynansis.exceptions.AporteException;
 import br.fynansis.Fynansis.exceptions.InvestimentoException;
 import br.fynansis.Fynansis.exceptions.UsuarioException;
 import br.fynansis.Fynansis.services.InvestimentoService;
@@ -49,6 +51,16 @@ public class InvestimentoController {
         try {
             Investimento investimento = investimentoService.atualizaInvestimento(investimentoDTO, id);
             return new ResponseEntity<>(investimento, HttpStatusCode.valueOf(200));
+        } catch (InvestimentoException i){
+            return new ResponseEntity<>(HttpStatusCode.valueOf(400));
+        }
+    }
+
+    @DeleteMapping("deletar/{id}")
+    public ResponseEntity<Investimento> deletaInvestimento(@PathVariable UUID id) {
+        try {
+            investimentoService.deletaInvestimento(id);
+            return new ResponseEntity<>(HttpStatusCode.valueOf(200));
         } catch (InvestimentoException i){
             return new ResponseEntity<>(HttpStatusCode.valueOf(400));
         }
