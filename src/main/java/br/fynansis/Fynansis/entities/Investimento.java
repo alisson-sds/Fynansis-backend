@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -44,14 +46,17 @@ public class Investimento {
     @JoinColumn(name = "cod_usuario")
     private Usuario codUsuario;
 
-    public Investimento(InvestimentoDTO investimentoDTO, Usuario codUsuario){
-        Date dataAtual       = retornaDataAtual();
-        this.descricao       = investimentoDTO.getDescricao();
-        this.sigla           = investimentoDTO.getSigla();
-        this.tipo            = investimentoDTO.getTipo();
-        this.instituicao     = investimentoDTO.getInstituicao();
-        this.codUsuario      = codUsuario;
-        this.dataCriacao     = dataAtual;
+    @OneToMany(mappedBy = "codInvestimento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Aporte> aportes = new ArrayList<>();
+
+    public Investimento(InvestimentoDTO investimentoDTO, Usuario codUsuario) {
+        Date dataAtual = retornaDataAtual();
+        this.descricao = investimentoDTO.getDescricao();
+        this.sigla = investimentoDTO.getSigla();
+        this.tipo = investimentoDTO.getTipo();
+        this.instituicao = investimentoDTO.getInstituicao();
+        this.codUsuario = codUsuario;
+        this.dataCriacao = dataAtual;
         this.dataAtualizacao = dataAtual;
 
     }
@@ -128,7 +133,11 @@ public class Investimento {
         return new Date();
     }
 
-    public Investimento atualizaInvestimento(InvestimentoDTO investimentoDTO){
+    public List<Aporte> getAportes() {
+        return aportes;
+    }
+
+    public Investimento atualizaInvestimento(InvestimentoDTO investimentoDTO) {
         setDescricao(investimentoDTO.getDescricao());
         setSigla(investimentoDTO.getSigla());
         setTipo(investimentoDTO.getTipo());

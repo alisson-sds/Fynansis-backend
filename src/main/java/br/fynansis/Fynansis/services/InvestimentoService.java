@@ -1,15 +1,12 @@
 package br.fynansis.Fynansis.services;
 
 import br.fynansis.Fynansis.dtos.InvestimentoDTO;
-import br.fynansis.Fynansis.entities.Aporte;
 import br.fynansis.Fynansis.entities.Investimento;
 import br.fynansis.Fynansis.entities.Usuario;
 import br.fynansis.Fynansis.exceptions.InvestimentoException;
-import br.fynansis.Fynansis.repositories.AporteRepository;
 import br.fynansis.Fynansis.repositories.InvestimentoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -17,11 +14,8 @@ public class InvestimentoService {
 
     private final InvestimentoRepository investimentoRepository;
 
-    private final AporteRepository aporteRepository;
-
-    public InvestimentoService(InvestimentoRepository investimentoRepository, AporteRepository aporteRepository){
+    public InvestimentoService(InvestimentoRepository investimentoRepository) {
         this.investimentoRepository = investimentoRepository;
-        this.aporteRepository = aporteRepository;
     }
 
     public Investimento criaInvestimento(InvestimentoDTO investimentoDTO, Usuario codUsuario){
@@ -45,8 +39,6 @@ public class InvestimentoService {
 
     public void deletaInvestimento(UUID codInvestimento) throws InvestimentoException{
         Investimento invest = leInvestimento(codInvestimento);
-        //List<Aporte> aporteList = aporteRepository.findByCodInvestimento_CodInvestimento(codInvestimento);
-        //aporteRepository.deleteAll(aporteList);
         investimentoRepository.delete(invest);
     }
 
