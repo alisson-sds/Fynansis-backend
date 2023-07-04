@@ -1,5 +1,7 @@
 package br.fynansis.Fynansis.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UsuarioDTO {
 
     private String nome;
@@ -8,7 +10,8 @@ public class UsuarioDTO {
     private String senha;
     private String cpf;
 
-    public UsuarioDTO(String nome, String email, String login, String senha, String cpf) {
+    public UsuarioDTO(@JsonProperty("nome") String nome, @JsonProperty("email") String email, @JsonProperty("login") String login, @JsonProperty("senha") String senha, @JsonProperty("cpf") String cpf) {
+
         this.nome = nome;
         this.email = email;
         this.login = login;
