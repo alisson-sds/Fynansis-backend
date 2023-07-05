@@ -4,13 +4,7 @@ import br.fynansis.Fynansis.dtos.UsuarioDTO;
 import br.fynansis.Fynansis.entities.Usuario;
 import br.fynansis.Fynansis.exceptions.UsuarioException;
 import br.fynansis.Fynansis.repositories.UsuarioRepository;
-
-import org.springframework.data.util.Pair;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -50,11 +44,21 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario leUsuario(Integer codUsuario) throws UsuarioException{
+    public Usuario leUsuario(Integer codUsuario) throws UsuarioException {
 
         Usuario usuario = usuarioRepository.findByCodUsuario(codUsuario);
-        if(usuario == null){
+        if (usuario == null) {
             throw new UsuarioException("Usuário não encontrado!");
+        }
+        return usuario;
+
+    }
+
+    public Usuario loginUsuario(String login, String senha) throws UsuarioException {
+
+        Usuario usuario = usuarioRepository.findByLoginUsuarioAndSenhaUsuario(login, senha);
+        if (usuario == null) {
+            throw new UsuarioException("Login e/ou senha incorreto(s)!");
         }
         return usuario;
 

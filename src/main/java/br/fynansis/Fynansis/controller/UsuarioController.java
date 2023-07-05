@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -38,14 +36,15 @@ public class UsuarioController {
     }
 
     @GetMapping("/ler/{id}")
-    public ResponseEntity<Usuario> leUsuario(@PathVariable Integer id) throws UsuarioException {
+    public ResponseEntity<Usuario> leUsuario(@PathVariable Integer id) {
         try {
             Usuario usuario = usuarioService.leUsuario(id);
             return new ResponseEntity<>(usuario, HttpStatusCode.valueOf(200));
-        }catch (UsuarioException u){
+        } catch (UsuarioException u) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(404));
         }
     }
+
 
     public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
