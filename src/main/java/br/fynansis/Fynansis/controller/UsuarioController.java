@@ -1,5 +1,6 @@
 package br.fynansis.Fynansis.controller;
 
+import br.fynansis.Fynansis.dtos.LoginDTO;
 import br.fynansis.Fynansis.dtos.UsuarioDTO;
 import br.fynansis.Fynansis.entities.Usuario;
 import br.fynansis.Fynansis.exceptions.UsuarioException;
@@ -45,9 +46,18 @@ public class UsuarioController {
         }
     }
 
-
-    public UsuarioController(UsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> loginUsuario(@RequestBody LoginDTO loginDTO) {
+        try {
+            Usuario usuario = usuarioService.loginUsuario(loginDTO.getLogin(), loginDTO.getSenha());
+            return new ResponseEntity<>(usuario, HttpStatusCode.valueOf(200));
+        } catch (UsuarioException u) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(404));
+        }
     }
 
 }
