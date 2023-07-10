@@ -1,18 +1,14 @@
 package br.fynansis.Fynansis.controller;
 
 import br.fynansis.Fynansis.dtos.InvestimentoDTO;
-import br.fynansis.Fynansis.dtos.UsuarioDTO;
-import br.fynansis.Fynansis.entities.Aporte;
 import br.fynansis.Fynansis.entities.Investimento;
 import br.fynansis.Fynansis.entities.Usuario;
-import br.fynansis.Fynansis.exceptions.AporteException;
 import br.fynansis.Fynansis.exceptions.InvestimentoException;
 import br.fynansis.Fynansis.exceptions.UsuarioException;
 import br.fynansis.Fynansis.services.InvestimentoService;
 import br.fynansis.Fynansis.services.UsuarioService;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -25,13 +21,13 @@ public class InvestimentoController {
     private UsuarioService  usuarioService;
 
     @PostMapping("/criar/{id}")
-    public ResponseEntity<String> criaInvestimento(@RequestBody InvestimentoDTO investimentoDTO, @PathVariable Integer id) throws UsuarioException {
-        try{
+    public ResponseEntity<Investimento> criaInvestimento(@RequestBody InvestimentoDTO investimentoDTO, @PathVariable Integer id) throws UsuarioException {
+        try {
             Usuario usuario = usuarioService.leUsuario(id);
             Investimento investimento = investimentoService.criaInvestimento(investimentoDTO, usuario);
-            return new ResponseEntity<>("Investimento criado com sucesso!", HttpStatusCode.valueOf(200));
-        } catch (UsuarioException u){
-            return new ResponseEntity<>("Usuário não encontrado", HttpStatusCode.valueOf(404));
+            return new ResponseEntity<>(investimento, HttpStatusCode.valueOf(200));
+        } catch (UsuarioException u) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(404));
         }
 
     }
