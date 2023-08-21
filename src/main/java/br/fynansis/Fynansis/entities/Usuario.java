@@ -3,7 +3,6 @@ package br.fynansis.Fynansis.entities;
 import br.fynansis.Fynansis.dtos.UsuarioDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -95,6 +94,7 @@ public class Usuario {
     public Usuario atualizaUsuario(UsuarioDTO usuarioDTO){
         setNomeUsuario(usuarioDTO.getNome());
         setSenhaUsuario(usuarioDTO.getSenha());
+        setLoginUsuario(usuarioDTO.getLogin());
         return this;
     }
 }
