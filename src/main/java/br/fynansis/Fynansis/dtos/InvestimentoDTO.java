@@ -1,7 +1,6 @@
 package br.fynansis.Fynansis.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InvestimentoDTO {
 
@@ -10,7 +9,10 @@ public class InvestimentoDTO {
     private String tipo;
     private String instituicao;
 
-    public InvestimentoDTO(String descricao, String sigla, String tipo, String instituicao) {
+    public InvestimentoDTO(@JsonProperty("descricao") String descricao,
+                           @JsonProperty("sigla") String sigla,
+                           @JsonProperty("tipo") String tipo,
+                           @JsonProperty("instituicao") String instituicao) {
         this.descricao = descricao;
         this.sigla = sigla;
         this.tipo = tipo;
