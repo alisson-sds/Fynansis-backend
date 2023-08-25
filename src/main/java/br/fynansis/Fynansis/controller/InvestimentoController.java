@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -33,11 +34,22 @@ public class InvestimentoController {
     }
 
     @GetMapping("/ler/{id}")
-    public ResponseEntity<Investimento> leInvestimento(@PathVariable UUID id){
+    public ResponseEntity<Investimento> leInvestimento(@PathVariable UUID id) {
         try {
             Investimento investimento = investimentoService.leInvestimento(id);
             return new ResponseEntity<>(investimento, HttpStatusCode.valueOf(200));
-        } catch (InvestimentoException i){
+        } catch (InvestimentoException i) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(404));
+        }
+    }
+
+    @GetMapping("/retornarInvestimentos/{id}")
+    public ResponseEntity<List<Investimento>> retornaTodosInvestimentos(@PathVariable Integer id) {
+        try {
+            Usuario usuario = usuarioService.leUsuario(id);
+            List<Investimento> investimentos = investimentoService.retornaTodosInvestimentos(usuario);
+            return new ResponseEntity<>(investimentos, HttpStatusCode.valueOf(200));
+        } catch (UsuarioException | InvestimentoException i) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(404));
         }
     }
@@ -47,7 +59,7 @@ public class InvestimentoController {
         try {
             Investimento investimento = investimentoService.atualizaInvestimento(investimentoDTO, id);
             return new ResponseEntity<>(investimento, HttpStatusCode.valueOf(200));
-        } catch (InvestimentoException i){
+        } catch (InvestimentoException i) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(400));
         }
     }

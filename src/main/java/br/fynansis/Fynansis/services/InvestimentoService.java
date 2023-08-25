@@ -7,6 +7,7 @@ import br.fynansis.Fynansis.exceptions.InvestimentoException;
 import br.fynansis.Fynansis.repositories.InvestimentoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -25,10 +26,18 @@ public class InvestimentoService {
 
     public Investimento leInvestimento(UUID codInvestimento) throws InvestimentoException {
         Investimento invest = investimentoRepository.findByCodInvestimento(codInvestimento);
-        if(invest == null){
+        if (invest == null) {
             throw new InvestimentoException("Investimento não encontrado!");
         }
         return invest;
+    }
+
+    public List<Investimento> retornaTodosInvestimentos(Usuario idUsuario) throws InvestimentoException {
+        List<Investimento> investimentos = investimentoRepository.findInvestimentListByCodUsuario(idUsuario);
+        if (investimentos.isEmpty()) {
+            throw new InvestimentoException("Investimento não encontrado!");
+        }
+        return investimentos;
     }
 
     public Investimento atualizaInvestimento(InvestimentoDTO investimentoDTO, UUID codInvestimento) throws InvestimentoException {
@@ -37,7 +46,7 @@ public class InvestimentoService {
         return investimentoRepository.save(invest);
     }
 
-    public void deletaInvestimento(UUID codInvestimento) throws InvestimentoException{
+    public void deletaInvestimento(UUID codInvestimento) throws InvestimentoException {
         Investimento invest = leInvestimento(codInvestimento);
         investimentoRepository.delete(invest);
     }
