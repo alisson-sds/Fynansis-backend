@@ -40,11 +40,11 @@ public class Investimento {
 
     @Column(name = "data_atualizacao", nullable = false)
     private Date dataAtualizacao;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "cod_usuario")
-    private Usuario codUsuario;
+    private Usuario usuario;
+
 
     @OneToMany(mappedBy = "codInvestimento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Aporte> aportes = new ArrayList<>();
@@ -55,7 +55,7 @@ public class Investimento {
         this.sigla = investimentoDTO.getSigla();
         this.tipo = investimentoDTO.getTipo();
         this.instituicao = investimentoDTO.getInstituicao();
-        this.codUsuario = codUsuario;
+        this.usuario = codUsuario;
         this.dataCriacao = dataAtual;
         this.dataAtualizacao = dataAtual;
 
@@ -121,12 +121,12 @@ public class Investimento {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public Usuario getCodUsuario() {
-        return codUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setCodUsuario(Usuario codUsuario) {
-        this.codUsuario = codUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Date retornaDataAtual() {

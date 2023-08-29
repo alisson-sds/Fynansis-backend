@@ -50,7 +50,7 @@ public class Aporte {
         this.numCotas = aporteDTO.getNumCotas();
         this.valorCompra = aporteDTO.getValorCompra();
         this.codInvestimento = investimento;
-        this.codUsuario = investimento.getCodUsuario();
+        this.codUsuario = investimento.getUsuario();
         this.dataCriacao = dataAtual;
         this.dataAtualizacao = dataAtual;
     }

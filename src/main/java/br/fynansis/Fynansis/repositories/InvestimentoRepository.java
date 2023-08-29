@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.UUID;
 
 public interface InvestimentoRepository extends JpaRepository<Investimento, Integer> {
+
     Investimento findByCodInvestimento(UUID codInvestimento);
 
-    List<Investimento> findInvestimentListByCodUsuario(Usuario codUsuario);
+    List<Investimento> findInvestimentListByCodUsuario(Usuario usuario);
 
 
 }
