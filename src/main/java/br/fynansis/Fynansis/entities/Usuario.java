@@ -11,7 +11,7 @@ public class Usuario {
     @Id
     @Column(name = "cod_usuario")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer codUsuario;
+    private Integer usuario;
     @Column(name = "nome_usuario", nullable = false)
     @NotBlank
     private String nomeUsuario;
@@ -84,11 +84,11 @@ public class Usuario {
     }
 
     public Integer getCodUsuario() {
-        return codUsuario;
+        return usuario;
     }
 
     public void setCodUsuario(Integer codUsuario) {
-        this.codUsuario = codUsuario;
+        this.usuario = codUsuario;
     }
 
     public Usuario atualizaUsuario(UsuarioDTO usuarioDTO){

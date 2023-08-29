@@ -45,7 +45,6 @@ public class Investimento {
     @JoinColumn(name = "cod_usuario")
     private Usuario usuario;
 
-
     @OneToMany(mappedBy = "codInvestimento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Aporte> aportes = new ArrayList<>();
 

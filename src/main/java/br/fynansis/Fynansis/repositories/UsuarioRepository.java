@@ -4,7 +4,8 @@ import br.fynansis.Fynansis.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    Usuario findByCodUsuario(Integer codUsuario);
+
+    Usuario findByUsuario(Integer usuario);
 
     Usuario findByEmailUsuarioOrLoginUsuarioOrCpfUsuario(String emailUsuario, String loginUsuario, String cpfUsuario);
 

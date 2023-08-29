@@ -36,7 +36,7 @@ public class UsuarioService {
     }
 
     public Usuario atualizaUsuario(UsuarioDTO usuarioDTO, Integer codUsuario) throws UsuarioException{
-        Usuario usuario = usuarioRepository.findByCodUsuario(codUsuario);
+        Usuario usuario = usuarioRepository.findByUsuario(codUsuario);
         if(usuario == null){
             throw new UsuarioException("Usuário não encontrado!");
         }
@@ -46,7 +46,7 @@ public class UsuarioService {
 
     public Usuario leUsuario(Integer codUsuario) throws UsuarioException {
 
-        Usuario usuario = usuarioRepository.findByCodUsuario(codUsuario);
+        Usuario usuario = usuarioRepository.findByUsuario(codUsuario);
         if (usuario == null) {
             throw new UsuarioException("Usuário não encontrado!");
         }

@@ -11,7 +11,7 @@ public interface InvestimentoRepository extends JpaRepository<Investimento, Inte
 
     Investimento findByCodInvestimento(UUID codInvestimento);
 
-    List<Investimento> findInvestimentListByCodUsuario(Usuario usuario);
+    List<Investimento> findByUsuario(Usuario usuario);
 
 
 }

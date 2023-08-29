@@ -33,7 +33,7 @@ public class InvestimentoService {
     }
 
     public List<Investimento> retornaTodosInvestimentos(Usuario idUsuario) throws InvestimentoException {
-        List<Investimento> investimentos = investimentoRepository.findInvestimentListByCodUsuario(idUsuario);
+        List<Investimento> investimentos = investimentoRepository.findByUsuario(idUsuario);
         if (investimentos.isEmpty()) {
             throw new InvestimentoException("Investimento não encontrado!");
         }
