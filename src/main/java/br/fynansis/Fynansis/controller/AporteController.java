@@ -1,7 +1,6 @@
 package br.fynansis.Fynansis.controller;
 
 import br.fynansis.Fynansis.dtos.AporteDTO;
-import br.fynansis.Fynansis.dtos.InvestimentoDTO;
 import br.fynansis.Fynansis.entities.Aporte;
 import br.fynansis.Fynansis.entities.Investimento;
 import br.fynansis.Fynansis.exceptions.AporteException;
@@ -12,6 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -36,11 +36,22 @@ public class AporteController {
     }
 
     @GetMapping("/ler/{id}")
-    public ResponseEntity<Aporte> leAporte(@PathVariable UUID id){
+    public ResponseEntity<Aporte> leAporte(@PathVariable UUID id) {
         try {
             Aporte aporte = aporteService.leAporte(id);
             return new ResponseEntity<>(aporte, HttpStatusCode.valueOf(200));
-        } catch (AporteException i){
+        } catch (AporteException i) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(404));
+        }
+    }
+
+    @GetMapping("retornarAportes/{id}")
+    public ResponseEntity<List<Aporte>> retornaTodosAportes(@PathVariable UUID id) {
+        try {
+            Investimento investimento = investimentoService.leInvestimento(id);
+            List<Aporte> aportes = aporteService.retornaAportes(investimento);
+            return new ResponseEntity<>(aportes, HttpStatusCode.valueOf(200));
+        } catch (InvestimentoException e) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(404));
         }
     }
@@ -50,7 +61,7 @@ public class AporteController {
         try {
             Aporte aporte = aporteService.atualizaAporte(aporteDTO, id);
             return new ResponseEntity<>(aporte, HttpStatusCode.valueOf(200));
-        } catch (AporteException i){
+        } catch (AporteException i) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(404));
         }
     }
