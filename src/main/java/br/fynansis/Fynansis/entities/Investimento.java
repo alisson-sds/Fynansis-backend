@@ -1,6 +1,7 @@
 package br.fynansis.Fynansis.entities;
 
 import br.fynansis.Fynansis.dtos.InvestimentoDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -46,6 +47,7 @@ public class Investimento {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "codInvestimento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Aporte> aportes = new ArrayList<>();
 
     public Investimento(InvestimentoDTO investimentoDTO, Usuario codUsuario) {

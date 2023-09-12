@@ -1,6 +1,6 @@
 package br.fynansis.Fynansis.dtos;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +13,9 @@ public class AporteDTO {
 
     private BigDecimal numCotas;
 
-    public AporteDTO(Date dataCompra, BigDecimal valorCompra, BigDecimal numCotas) {
+    public AporteDTO(@JsonProperty("dataCompra") Date dataCompra,
+                     @JsonProperty("valorCompra") BigDecimal valorCompra,
+                     @JsonProperty("numCotas") BigDecimal numCotas) {
         this.dataCompra = dataCompra;
         this.valorCompra = valorCompra;
         this.numCotas = numCotas;

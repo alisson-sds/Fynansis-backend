@@ -2,6 +2,7 @@ package br.fynansis.Fynansis.entities;
 
 import br.fynansis.Fynansis.dtos.AporteDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -42,6 +43,7 @@ public class Aporte {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "cod_investimento")
+    @JsonManagedReference
     private Investimento codInvestimento;
 
     public Aporte(AporteDTO aporteDTO, Investimento investimento) {
