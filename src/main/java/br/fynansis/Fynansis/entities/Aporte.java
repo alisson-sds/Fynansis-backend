@@ -1,6 +1,7 @@
 package br.fynansis.Fynansis.entities;
 
 import br.fynansis.Fynansis.dtos.AporteDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -19,6 +20,7 @@ public class Aporte {
     private UUID codAporte;
 
     @Column(name = "data_compra", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataCompra;
 
 
