@@ -12,7 +12,8 @@ Recursos Principais
 ✅ Aportes: Realize aportes nos seus investimentos de maneira simples.
 ✅ API RESTful: Utilizamos uma API RESTful para facilitar a integração com diferentes plataformas e dispositivos.
 
-Como Começar
+Como Começar:
+
 -Clone este repositório para sua máquina local.
   - git clone https://github.com/alisson-sds/Fynansis-backend.git
 
